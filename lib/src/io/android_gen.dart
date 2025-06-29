@@ -47,7 +47,6 @@ void _buildAndroidLocales(String dirPath) {
     }
   }
 
-
   var manifestString = openString(manifestPath);
   if (manifestString.isEmpty) {
     trace('Can\'t locate AndroidManifest.xml');
