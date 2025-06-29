@@ -32,24 +32,21 @@ void _buildAndroidLocales(String dirPath) {
   }
 
   var hasAndroid33 = false;
-  var idx1 = buildGradleString.indexOf('compileSdkVersion');
-  if (idx1 > -1) {
-    var idx2 = buildGradleString.indexOf('\n', idx1);
-    var compileSdkVersion = buildGradleString
-        .substring(idx1 + 'compileSdkVersion '.length, idx2)
-        .trim();
-    if (compileSdkVersion == 'flutter.compileSdkVersion') {
-      /// we don't care.
-    } else {
-      var versionNumber = int.tryParse(compileSdkVersion);
-      if (versionNumber != null) {
-        if (versionNumber >= 33) {
-          hasAndroid33 = true;
-          trace('Android 33+ detected');
-        }
+
+  final sdkRegex = RegExp(r'compileSdk(?:Version)?\s*[=:]?\s*(\S+)');
+  final match = sdkRegex.firstMatch(buildGradleString);
+
+  if (match != null) {
+    final sdkValue = match.group(1);
+    if (sdkValue != null && sdkValue != 'flutter.compileSdkVersion') {
+      final versionNumber = int.tryParse(sdkValue);
+      if (versionNumber != null && versionNumber >= 33) {
+        hasAndroid33 = true;
+        trace('Android 33+ detected');
       }
     }
   }
+
 
   var manifestString = openString(manifestPath);
   if (manifestString.isEmpty) {
