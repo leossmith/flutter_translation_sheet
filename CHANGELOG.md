@@ -1,4 +1,4 @@
-## [1.0.34]
+## [1.0.35]
 - upgrade min Dart SDK to 3.8.0
 - updated dependencies
 - updated to newer gradle
