@@ -1,3 +1,8 @@
+## [1.0.35]
+- upgrade min Dart SDK to 3.8.0
+- updated dependencies
+- updated to newer gradle
+
 ## [1.0.33]
 - upgrade min Dart SDK to 3.2.0
 
